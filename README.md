@@ -19,7 +19,6 @@ A minimal boilerplate for creating multiplayer IO games using Hathora as the gam
 - Shared types between client and server
 - Automatic deployment to Hathora Cloud
 - Docker containerization
-- Node version management with .nvmrc
 
 ## Project Structure
 
