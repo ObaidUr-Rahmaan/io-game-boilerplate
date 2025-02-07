@@ -118,3 +118,7 @@ The React Client will be deployed to Vercel automatically on every push to the m
 ## License
 
 MIT 
+
+## ToDos
+
+- Integrate Supabase

@@ -1,0 +1,38 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy-server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          
+      - name: Install Hathora CLI
+        run: npm install -g @hathora/cli
+      
+      - name: Deploy to Hathora Cloud
+        run: |
+          hathora-cloud deploy \
+            --appId ${{ secrets.HATHORA_APP_ID }} \
+            --token ${{ secrets.HATHORA_TOKEN }} \
+            --roomsPerProcess 2 \
+            --planName tiny \
+            --transportType tls \
+            --containerPort 4000
+        env:
+          HATHORA_APP_ID: ${{ secrets.HATHORA_APP_ID }}
+          HATHORA_TOKEN: ${{ secrets.HATHORA_TOKEN }} 
